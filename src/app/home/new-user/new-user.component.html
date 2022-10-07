@@ -5,16 +5,45 @@
     <input placeholder="Email"
           class="form-control"
           formControlName="email"/>
+          <app-message
+          *ngIf="
+          newUserForm.get('email')?.errors?.['required']&&
+          newUserForm.get('email')?.touched
+          "
+          message="E-mail é obrigatório">
+        </app-message>
+        <app-message
+        *ngIf="
+        newUserForm.get('email')?.errors?.['email'] &&
+        newUserForm.get('email')?.touched"
+        message="E-mail em formato incorreto"
+        ></app-message>
   </div>
   <div class="form-group mt-2">
     <input placeholder="Nome Completo"
           class="form-control"
           formControlName="fullName"/>
+    <app-message
+    *ngIf="newUserForm.get('fullName')?.errors &&
+    newUserForm.get('fullName')?.touched"
+    message="Nome é obrigatório"
+    ></app-message>
   </div>
   <div class="form-group mt-2">
     <input placeholder="Usuário"
            class="form-control"
            formControlName="userName"/>
+    <app-message
+    *ngIf="
+    newUserForm.get('userName')?.errors?.['lowercase'] &&
+    newUserForm.get('userName')?.touched
+    "
+    message="Usuário deve ser em letra minúscula"
+    ></app-message>
+    <app-message
+    *ngIf="newUserForm.get('userName')?.errors?.['existingUser']"
+    message="Usuário já existe"
+    ></app-message>
   </div>
   <div class="form-group mt-2">
     <input type="password"
